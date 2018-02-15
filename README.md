@@ -10,6 +10,8 @@ Read up on Node.js modules [Node.js Modules](https://nodejs.org/api/modules.html
 
 Node.js http server Express [Express intro](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction)
 
+Understand how to use Node Package Manager [NPM](https://www.npmjs.com/)
+
 Webpack basics [Webpack](https://webpack.js.org/)
 
 ### Prerequisites
