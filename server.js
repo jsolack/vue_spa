@@ -15,6 +15,7 @@ const indexHTML = (function () {
 })()
 
 app.use('/dist', express.static(path.resolve(__dirname, './dist')))
+app.use('/static', express.static(path.join(__dirname, 'src', 'static')))
 
 // extend the dev-server.js modules
 require('./build/dev-server')(app)

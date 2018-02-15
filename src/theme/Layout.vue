@@ -3,8 +3,7 @@
       <nav class="nav has-shadow">
         <div class="container">
           <a href="/">
-            <!-- <img src="/static/img/logo.png" alt="vue spa" /> -->
-            sup!!!
+            <img class="image is-64x64" src="/static/img/logo.png" alt="vue spa" />
           </a>
         </div>
       </nav>
@@ -22,6 +21,8 @@
 <script>
 export default {}
 </script>
-<style lang="sass"></style>
+<style lang="sass">
+@import '~bulma'
+</style>
 
 
