@@ -14,6 +14,10 @@ Understand how to use Node Package Manager [NPM](https://www.npmjs.com/)
 
 Webpack basics [Webpack](https://webpack.js.org/)
 
+[Babel](https://babeljs.io/) polyfill for transpiling es6(es2015) down to es5
+
+Bulma low-overhead css framework [Bulma](https://bulma.io/) using SASS preprocessing
+
 ESLint and the standard rules [standardJS](https://standardjs.com/)
 
 * 2 spaces – for indentation
