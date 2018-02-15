@@ -17,6 +17,7 @@ Webpack basics [Webpack](https://webpack.js.org/)
 Here's what you'll need:
 
 [Node.js](https://nodejs.org/en/)
+
 NPM (comes with Node)
 
 ### Installing
