@@ -1,17 +1,30 @@
 <template>
   <div class="card">
     <div class="card-content">
-      <h3>{{ card.title }}</h3>
-      {{ card.content }}
+      <slot name="card-title"></slot>
+      <slot name="card-content"></slot>
     </div>
     <footer class="card-footer">
-      <a class="card-footer-item" v-bind:href="card.link" target="_blank">Read More</a>
+      <a class="card-footer-item" v-bind:href="link" target="_blank">Read More</a>
     </footer>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['card']
+  props: ['link']
 }
 </script>
+<style scoped>
+  .card {
+    padding-bottom: 40px;
+    height: 100%;
+  }
+  footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+  }
+</style>
+

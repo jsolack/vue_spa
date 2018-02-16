@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a href="/">
         <img class="image is-64x64" src="/static/img/logo.png" alt="vue spa" />
