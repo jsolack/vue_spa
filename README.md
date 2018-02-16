@@ -49,6 +49,18 @@ Just fork this repository
 
 [Fork this repo](https://github.com/mattcc82/vue_spa/fork)
 
+Open a git bash or node cli
+
+```
+npm start
+```
+
+Navigate to 
+
+```
+localhost:3000
+```
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
