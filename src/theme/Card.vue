@@ -1,5 +1,6 @@
 <template>
   <div class="card">
+    <slot name="card-image"></slot>
     <div class="card-content">
       <slot name="card-title"></slot>
       <slot name="card-content"></slot>

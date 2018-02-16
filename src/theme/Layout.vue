@@ -6,7 +6,7 @@
       <div class="container content">
         <!-- Vue router will load in the Category component on the '/' path -->
         <transition appear name="slide-fade">
-          <router-view></router-view>
+          <router-view v-bind:key="$route.params.id"></router-view>
         </transition>
       </div>
     </section>

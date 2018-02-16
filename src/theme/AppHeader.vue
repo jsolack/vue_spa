@@ -4,8 +4,11 @@
       <router-link to="/" exact>
         <img class="image is-64x64" src="/static/img/logo.png" alt="vue spa" />
       </router-link>
-      <router-link to="/" class="navbar-item is-tab" exact>
-        Home
+      <router-link to="/category/data" class="navbar-item is-tab" exact>
+        Dynamic Data
+      </router-link>
+      <router-link to="/category/automation" class="navbar-item is-tab" exact>
+        Automation
       </router-link>
       <router-link to="/login" class="navbar-item is-tab">
         Login
