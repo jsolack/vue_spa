@@ -1,9 +1,9 @@
 <template v-cloak>
   <div id="app">
     <app-header></app-header>
-    <hero></hero>
+    <hero v-if="['notfound'].indexOf($route.name) === -1"></hero>
     <section class="main-section section">
-      <div class="container content">
+      <div class="content">
         <!-- Vue router will load in the Category component on the '/' path -->
         <transition appear name="slide-fade">
           <router-view v-bind:key="$route.params.id"></router-view>
@@ -32,6 +32,9 @@
 
   [v-cloak] {
     display: none;
+  }
+  .main-section {
+    padding: 0;
   }
   .columns{
     flex-wrap: wrap;

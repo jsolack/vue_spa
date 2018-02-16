@@ -6,7 +6,7 @@
       <slot name="card-content"></slot>
     </div>
     <footer class="card-footer">
-      <a class="card-footer-item" v-bind:href="link" target="_blank">Read More</a>
+      <a class="card-footer-item" disabled v-bind:href="link" target="_blank">Read More</a>
     </footer>
   </div>
 </template>

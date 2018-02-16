@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Category from './theme/Category.vue'
 import Login from './theme/Login.vue'
+import NotFound from './theme/NotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -21,8 +22,10 @@ const router = new VueRouter({
   // pass parameters ":<my parameter>"
   routes: [
     { path: '/login', component: Login },
-    { path: '/category/:id', component: Category },
-    { path: '/', redirect: '/category' }
+    { path: '/category/:id', name: 'category', component: Category },
+    { path: '/', redirect: '/category/data' },
+    // wildcard path used here for a 404 page
+    { path: '*', name: 'notfound', component: NotFound }
   ]
 })
 
