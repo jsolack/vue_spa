@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="container">
-      <div class="content has-text-centered">
+      <div class="has-text-centered">
         Footer!
         <a href="#">Link</a>
       </div>
