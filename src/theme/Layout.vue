@@ -81,4 +81,13 @@
     transform: translateX(10px);
     opacity: 0;
   }
+  .fade-enter-active {
+    transition: opacity .8s ease-in-out;
+  }
+  .fade-enter-to {
+    opacity: 1;
+  }
+  .fade-enter {
+    opacity: 0;
+  }
 </style>

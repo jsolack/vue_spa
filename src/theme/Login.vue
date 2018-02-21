@@ -8,7 +8,7 @@
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input class="input" type="text" placeholder="Your username">
+            <input v-model="username" class="input" type="text" placeholder="Your username">
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input class="input" type="password" placeholder="Your password">
+            <input v-model="password" class="input" type="password" placeholder="Your password">
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <button class="button is-primary">
+            <button v-on:click="login()" class="button is-primary">
               Login
             </button>
           </div>
@@ -41,3 +41,25 @@
     </div>
   </div>
 </template>
+<script>
+import appService from '../app.service.js'
+export default {
+  data () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    login () {
+      appService.login({username: this.username, password: this.password})
+        .then((data) => {
+          window.localStorage.setItem('token', data.token)
+          window.localStorage.setItem('tokenExpiration', data.expiration)
+        })
+        .catch(() => window.alert('Could not login'))
+    }
+  }
+}
+</script>
+

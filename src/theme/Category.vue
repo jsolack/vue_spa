@@ -5,11 +5,16 @@
         <app-card v-bind:link="card.link">
             <div slot="card-image" class="card-image">
               <figure v-bind:class="['image', card.img_class]">
-                <img v-bind:src="card.img" v-bind:alt="card.title">
+                <div v-images-loaded="loaded">
+                  <transition name="fade">
+                    <img v-show="imgFlag" v-bind:src="card.img" v-bind:alt="card.title">
+                  </transition>  
+                </div>
+                  <img v-show="!imgFlag" src="/static/img/loading.gif" alt="loading..." />
               </figure>
             </div>
           <h3 slot="card-title">{{ card.title }}</h3>
-          <p slot="card-content">{{ card.content }}</p>
+          <p slot="card-content">{{ card.card_content }}</p>
         </app-card>
       </div>  
     </div>
@@ -17,83 +22,47 @@
 </template>
 <script>
   import Card from './Card.vue'
+  import appService from '../app.service.js'
+  import imagesLoaded from 'vue-images-loaded'
   export default {
+    directives: {
+      imagesLoaded
+    },
     components: {
       'app-card': Card
     },
     data () {
       return {
         id: this.$route.params.id,
-        cards_data: [
-          {
-            id: 1,
-            title: 'Dashboards',
-            content: 'Data Tools can bring data and insights to the web for exploration and sharing across organizations',
-            img: '/static/img/dashboard.png',
-            img_class: 'is-4by3',
-            link: '#'
-          },
-          {
-            id: 2,
-            title: 'Data Visualization',
-            content: 'Dynamic charting and filtering of data for impact',
-            img: '/static/img/dataviz.gif',
-            img_class: 'is-4by3',
-            link: '#'
-          },
-          {
-            id: 3,
-            title: 'Microsites/Portals',
-            content: 'Create an ecosystem of dashboards, metrics, and sharing for a unified interface to decision making ',
-            img: '/static/img/microsite.png',
-            img_class: 'is-4by3',
-            link: '#'
-          },
-          {
-            id: 4,
-            title: 'Journey Maps',
-            content: 'Visualize online the journey and processes that customers and stakeholders make ',
-            img: '/static/img/journeymap.png',
-            img_class: 'is-4by3',
-            link: '#'
-          }
-        ],
-        cards_automation: [
-          {
-            id: 5,
-            title: 'QA Automation',
-            content: 'Leverage programatic methods to find and catch quality errors ',
-            img: '/static/img/quality.png',
-            img_class: 'is-4by3',
-            link: '#'
-          },
-          {
-            id: 6,
-            title: 'Data Cleaning & Transformation',
-            content: 'Put structure around data and clean out dirty data from multiple sources ',
-            img: '/static/img/cleaning.png',
-            img_class: 'is-4by3',
-            link: '#'
-          },
-          {
-            id: 7,
-            title: 'Deliverables',
-            content: 'Replace error-prone and mechanical poplulation of deliverables with a programatic, rules-based approach ',
-            img: '/static/img/deliverables.gif',
-            img_class: 'is-4by3',
-            link: '#'
-          }
-        ],
-        cards: []
+        cards: [],
+        imgFlag: false
       }
     },
     methods: {
       loadCards () {
+        this.imgFlag = false
+        let categoryId = 'data'
         if (this.id === 'data') {
-          this.cards = this.cards_data
+          categoryId = 'data'
         } else {
-          this.cards = this.cards_automation
+          categoryId = 'automation'
         }
+        appService.getCards(categoryId).then(data => {
+          this.fixImgPath(data)
+          this.imagesLoaded = true
+        })
+      },
+      fixImgPath (data) {
+        for (var i = 0; i < data.data.length; i++) {
+          data.data[i]['img'] = data.imgPath + data.data[i]['img']
+        }
+        this.cards = data.data
+      },
+      loaded (instance) {
+        var self = this
+        setTimeout(function () {
+          self.imgFlag = true
+        }, 800)
       }
     },
     watch: {
