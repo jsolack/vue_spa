@@ -2,7 +2,7 @@
   <div id="app">
     <div class="main-section">
       <app-header></app-header>
-      <hero v-if="['notfound', 'login'].indexOf($route.name) === -1"></hero>
+      <hero v-if="['notfound'].indexOf($route.name) === -1"></hero>
       <section>
         <div class="content" ref="content">
           <transition appear name="slide-fade" mode="out-in">

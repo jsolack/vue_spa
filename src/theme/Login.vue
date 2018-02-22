@@ -1,11 +1,11 @@
-<template>
+<template v-cloak>
   <div class="content">
     <transition-group name="fade">
-    <div v-if="isAuthenticated" class="hero is-medium is-success is-bold is-fullheight" key="logout">
+    <div v-if="isAuthenticated" class="hero is-medium is-success is-bold " key="logout">
       <div class="hero-body">
-        <div class="container">
+        <div class="container" v-show="profileFlag">
           <h1 class="title">
-            Hello {{fullName}} ({{email}})
+            Hello {{profile.first_name}} {{profile.last_name}} ({{profile.email}})
           </h1>
           <h2 class="subtitle">
             Looking good
@@ -75,29 +75,35 @@ export default {
       password: '',
       isAuthenticated: false,
       isAuthenticating: false,
-      email: '',
-      fullName: ''
+      profile: {},
+      profileFlag: false
+    }
+  },
+  watch: {
+    isAuthenticated: function (val) {
+      if (val) {
+        appService.getProfile()
+          .then(profile => {
+            this.profile = profile
+            this.profileFlag = true
+          })
+      } else {
+        this.profileFlag = false
+        this.profile = {}
+      }
     }
   },
   methods: {
     login () {
       this.isAuthenticating = true
-      this.fullName = ''
-      this.email = ''
       appService.login({username: this.username, password: this.password})
         .then((data) => {
           let token = data.token
           let dToken = jwtDecode(token)
           let expiration = dToken.exp
-          let email = dToken.user.email
-          let fullName = dToken.user.first_name + ' ' + dToken.user.last_name
           // console.log(jwtDecode(token))
           window.localStorage.setItem('token', token)
           window.localStorage.setItem('tokenExpiration', expiration)
-          window.localStorage.setItem('email', email)
-          window.localStorage.setItem('fullName', fullName)
-          this.fullName = window.localStorage.getItem('fullName')
-          this.email = window.localStorage.getItem('email')
           this.isAuthenticating = false
           this.isAuthenticated = true
           this.username = ''
@@ -106,10 +112,7 @@ export default {
         .catch(() => window.alert('Could not login'))
     },
     logout () {
-      window.localStorage.setItem('token', null)
-      window.localStorage.setItem('tokenExpiration', null)
-      window.localStorage.setItem('email', null)
-      window.localStorage.setItem('fullName', null)
+      window.localStorage.clear()
       this.isAuthenticated = false
       this.isAuthenticating = false
     }
@@ -118,8 +121,6 @@ export default {
     let exp = window.localStorage.getItem('tokenExpiration')
     var unixTimeStamp = new Date().getTime() / 1000
     if (exp !== null && parseInt(exp) - unixTimeStamp > 0) {
-      this.fullName = window.localStorage.getItem('fullName')
-      this.email = window.localStorage.getItem('email')
       this.isAuthenticating = false
       this.isAuthenticated = true
     }
