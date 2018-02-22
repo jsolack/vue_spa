@@ -27,7 +27,7 @@ const router = new VueRouter({
   // define the routes below
   // pass parameters ":<my parameter>"
   routes: [
-    { path: '/login', component: Login },
+    { path: '/login', name: 'login', component: Login },
     { path: '/category/:id', name: 'category', component: Category },
     { path: '/', redirect: '/category/data' },
     // wildcard path used here for a 404 page
