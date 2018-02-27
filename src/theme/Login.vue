@@ -3,9 +3,9 @@
     <transition-group name="fade">
     <div v-if="isAuthenticated" class="hero is-medium is-success is-bold " key="logout">
       <div class="hero-body">
-        <div class="container" v-show="profileFlag">
+        <div class="container">
           <h1 class="title">
-            Hello {{profile.first_name}} {{profile.last_name}} ({{profile.email}})
+            Hello Authenticated User
           </h1>
           <h2 class="subtitle">
             Looking good
@@ -27,7 +27,7 @@
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <input v-model="username" class="input" type="text" placeholder="enter your email">
+                  <input v-on:keyup.13="login()" v-model="username" class="input" type="text" placeholder="enter your email">
                 </div>
               </div>
             </div>
@@ -39,7 +39,7 @@
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <input v-model="password" class="input" type="password" placeholder="enter your password">
+                  <input v-on:keyup.13="login()" v-model="password" class="input" type="password" placeholder="enter your password">
                 </div>
               </div>
             </div>
@@ -61,68 +61,58 @@
         </div>
       </div>    
     </div>
+    <div class="modal is-active"
+      v-show="loginError"
+      @close="loginError = false" key="loginErrorModal">
+      <div class="modal-background" @click="loginError = false"></div>
+      <div class="modal-content">
+        <div class="box has-text-centered">
+          <h2><span class="has-text-danger">X</span> There was a problem logging you in :(</h2>
+        </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close" @click="loginError = false"></button>
+    </div>
     </transition-group>  
   </div>
 </template>
 <script>
-import appService from '../app.service.js'
-import jwtDecode from 'jwt-decode'
-
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
       username: '',
       password: '',
-      isAuthenticated: false,
+      // isAuthenticated: false,
+      // profile: {},
+      // profileFlag: false,
       isAuthenticating: false,
-      profile: {},
-      profileFlag: false
+      loginError: false
     }
   },
-  watch: {
-    isAuthenticated: function (val) {
-      if (val) {
-        appService.getProfile()
-          .then(profile => {
-            this.profile = profile
-            this.profileFlag = true
-          })
-      } else {
-        this.profileFlag = false
-        this.profile = {}
-      }
-    }
+  computed: {
+    ...mapGetters(['isAuthenticated'])
   },
   methods: {
+    /*
+    You can dispatch actions in components with this.$store.dispatch('xxx'), 
+    or use the mapActions helper which maps component methods to store.dispatch calls (requires root store injection)
+    */
+    ...mapActions({
+      logout: 'logout'
+    }),
     login () {
       this.isAuthenticating = true
-      appService.login({username: this.username, password: this.password})
+      this.$store.dispatch('login', { username: this.username, password: this.password })
         .then((data) => {
-          let token = data.token
-          let dToken = jwtDecode(token)
-          let expiration = dToken.exp
-          // console.log(jwtDecode(token))
-          window.localStorage.setItem('token', token)
-          window.localStorage.setItem('tokenExpiration', expiration)
           this.isAuthenticating = false
-          this.isAuthenticated = true
-          this.username = ''
-          this.password = ''
+          if (data === 'error') {
+            this.loginError = true
+          } else {
+            this.isAuthenticating = false
+            this.username = ''
+            this.password = ''
+          }
         })
-        .catch(() => window.alert('Could not login'))
-    },
-    logout () {
-      window.localStorage.clear()
-      this.isAuthenticated = false
-      this.isAuthenticating = false
-    }
-  },
-  created () {
-    let exp = window.localStorage.getItem('tokenExpiration')
-    var unixTimeStamp = new Date().getTime() / 1000
-    if (exp !== null && parseInt(exp) - unixTimeStamp > 0) {
-      this.isAuthenticating = false
-      this.isAuthenticated = true
     }
   }
 }

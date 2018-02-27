@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="columns">
-      <div class="column is-9-mobile is-offset-2-mobile is-3-desktop is-6-tablet" v-for="(card, index) in cards" v-bind:key="card.id">
+      <div v-if="contentLoaded" class="column is-9-mobile is-offset-2-mobile is-3-desktop is-6-tablet" v-for="(card, index) in cards" v-bind:key="card.id">
         <app-card v-bind:link="card.link">
             <div slot="card-image" class="card-image">
               <figure v-bind:class="['image', card.img_class]">
@@ -22,8 +22,8 @@
 </template>
 <script>
   import Card from './Card.vue'
-  import appService from '../app.service.js'
   import imagesLoaded from 'vue-images-loaded'
+  import { mapGetters } from 'vuex'
   export default {
     directives: {
       imagesLoaded
@@ -33,30 +33,26 @@
     },
     data () {
       return {
-        id: this.$route.params.id,
-        cards: [],
+        contentLoaded: false,
         imgFlag: false
       }
+    },
+    computed: {
+      ...mapGetters('cardsModule', ['cards'])
     },
     methods: {
       loadCards () {
         this.imgFlag = false
         let categoryId = 'data'
-        if (this.id === 'data') {
+        if (this.$route.params.id === 'data') {
           categoryId = 'data'
         } else {
           categoryId = 'automation'
         }
-        appService.getCards(categoryId).then(data => {
-          this.fixImgPath(data)
-          this.imagesLoaded = true
-        })
-      },
-      fixImgPath (data) {
-        for (var i = 0; i < data.data.length; i++) {
-          data.data[i]['img'] = data.imgPath + data.data[i]['img']
-        }
-        this.cards = data.data
+        this.$store.dispatch('cardsModule/updateCategory', categoryId)
+          .then(() => {
+            this.contentLoaded = true
+          })
       },
       loaded (instance) {
         var self = this
@@ -67,7 +63,7 @@
     },
     watch: {
       '$route' (to, from) {
-        this.id = to.params.id
+        // this.id = to.params.id
         this.loadCards()
       }
     },
@@ -75,7 +71,7 @@
       this.loadCards()
       // this is how you would grab vars from the query
       // this.$route.query.page returns the "page" var if valid 
-      console.log(this.$route.query.page)
+      // console.log(this.$route.query.page)
     }
   }
 </script>

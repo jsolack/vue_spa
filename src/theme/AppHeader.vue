@@ -11,7 +11,8 @@
         Automation
       </router-link>
       <router-link to="/login" class="navbar-item is-tab">
-        Login
+        <span v-if="isAuthenticated">Logout</span>
+        <span v-else>Login</span>
       </router-link>
       <div class="navbar-burger">
         <span></span>
@@ -21,3 +22,14 @@
     </div>
   </nav>
 </template>
+<script>
+// mappGetters helper from vuex library
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    // map stored getters to local computed properties
+    ...mapGetters(['isAuthenticated'])
+  }
+}
+</script>
+

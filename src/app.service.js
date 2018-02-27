@@ -23,6 +23,9 @@ const appService = {
         .then(response => {
           data['data'] = response.data.content
           data['imgPath'] = imgPath
+          for (var i = 0; i < data.data.length; i++) {
+            data.data[i]['img'] = data.imgPath + data.data[i]['img']
+          }
           resolve(data)
         })
     })

@@ -4,7 +4,10 @@ Playing around with Vue.js to get familiar with SPA patterns using Vue.js as the
 
 ## Getting Started
 
-You'll want to make sure to be familiar with [Vue.js](https://vuejs.org/).
+You'll want to make sure to be familiar with [Vue.js](https://vuejs.org/) and the other technologies associated with Vue.js
+* vue-router
+* Vue.js developer tool plugin/extention [Vue.js devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en)
+* Vue state management [Vuex](https://vuex.vuejs.org/en/intro.html)
 
 Read up on Node.js modules [Node.js Modules](https://nodejs.org/api/modules.html)
 
@@ -15,6 +18,8 @@ Understand how to use Node Package Manager [NPM](https://www.npmjs.com/)
 Webpack basics [Webpack](https://webpack.js.org/)
 
 [Babel](https://babeljs.io/) polyfill for transpiling es6(es2015) down to es5
+
+The concept of [es6 Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 Bulma low-overhead css framework [Bulma](https://bulma.io/) using SASS preprocessing
 
@@ -55,11 +60,22 @@ Open a git bash or node cli
 npm start
 ```
 
+To stop a node instance in a bash
+
+```
+ctrl + c
+```
+
 Navigate to 
 
 ```
 localhost:3000
 ```
+
+### Footnote
+
+I set up Web2py restful api to communicate back data and auth information. Check out the guts of that out here:
+(https://o2beta.gongos.com/vue_spa_rest_api/)
 
 ## License
 
