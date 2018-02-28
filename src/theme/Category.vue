@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="columns">
-      <div v-if="contentLoaded && isAuthenticated" class="column is-9-mobile is-offset-2-mobile is-3-desktop is-6-tablet" v-for="(card, index) in cards" v-bind:key="card.id">
+      <div v-if="contentLoaded && isAuthenticated" class="column is-9-mobile is-offset-2-mobile is-3-desktop is-6-tablet" v-for="card in cards" v-bind:key="card.id">
         <app-card v-bind:link="card.link">
             <div slot="card-image" class="card-image">
               <figure v-bind:class="['image', card.img_class]">
@@ -69,9 +69,7 @@
       }
     },
     created () {
-      if (this.isAuthenticated) {
-        this.loadCards()
-      }
+      this.loadCards()
       // this is how you would grab vars from the query
       // this.$route.query.page returns the "page" var if valid 
       // console.log(this.$route.query.page)
