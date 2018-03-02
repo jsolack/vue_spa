@@ -18,13 +18,14 @@ describe('Category.vue', () => {
       store,
       render: h => h('router-view')
     })
-    store.watch((state) => {
-      return state.cardsModule.cards
-    },
-    function () {
-      expect(vm.$el.querySelectorAll('.column').length).to.equal(4)
-      console.log(vm.$el)
-      done()
-    })
+    store.watch(
+      (state) => {
+        return state.cardsModule.cards
+      },
+      function () {
+        expect(vm.$el.querySelectorAll('.column').length).to.equal(4)
+        done()
+      }
+    )
   })
 })
