@@ -10,7 +10,7 @@
                     <img v-show="imgFlag" v-bind:src="card.img" v-bind:alt="card.title">
                   </transition>  
                 </div>
-                  <img v-show="!imgFlag" src="/static/img/loading.gif" alt="loading..." />
+                  <img v-show="!imgFlag" src="/static/images/loading.gif" alt="loading..." />
               </figure>
             </div>
           <h3 slot="card-title">{{ card.title }}</h3>

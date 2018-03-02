@@ -2,7 +2,7 @@
   <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <router-link to="/" exact>
-        <img class="image is-64x64" src="/static/img/logo.png" alt="vue spa" />
+        <img class="image is-64x64" src="/static/images/logo.png" alt="vue spa" />
       </router-link>
       <router-link to="/category/data" class="navbar-item is-tab">
         Dynamic Data

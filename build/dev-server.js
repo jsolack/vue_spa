@@ -1,5 +1,5 @@
-const webpack = require('webpack');
-const clientConfig = require('./webpack.client.config');
+const webpack = require('webpack')
+const clientConfig = require('./webpack.client.config')
 
 module.exports = function setupDevServer (app) {
   clientConfig.entry.app = [
