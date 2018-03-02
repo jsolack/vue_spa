@@ -25,6 +25,8 @@ Bulma low-overhead css framework [Bulma](https://bulma.io/) using SASS preproces
 
 ESLint and the standard rules [standardJS](https://standardjs.com/)
 
+Unit testing using [Karma](http://karma-runner.github.io/2.0/index.html) (test runner), [Mocha](https://mochajs.org/) (unit testing framework) [Chai](assertion library), [Sinon](http://sinonjs.org/) (mocks), [PhantomJS](http://phantomjs.org/)
+
 * 2 spaces – for indentation
 * Single quotes for strings – except to avoid escaping
 * No unused variables – this one catches tons of bugs!

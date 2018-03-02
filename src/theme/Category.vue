@@ -44,13 +44,12 @@
     methods: {
       loadCards () {
         this.imgFlag = false
-        let categoryId = 'data'
         if (this.$route.params.id === 'data') {
-          categoryId = 'data'
+          this.categoryId = 'data'
         } else {
-          categoryId = 'automation'
+          this.categoryId = 'automation'
         }
-        this.$store.dispatch('cardsModule/updateCategory', categoryId)
+        this.$store.dispatch('cardsModule/updateCategory', this.categoryId)
           .then(() => {
             this.contentLoaded = true
           })
@@ -69,7 +68,14 @@
       }
     },
     created () {
-      this.loadCards()
+      this.$store.dispatch('initAuth')
+        .then(() => {
+          if (this.isAuthenticated) {
+            this.loadCards()
+          } else {
+            this.$router.push({ name: 'login', query: { redirect: '/' } })
+          }
+        })
       // this is how you would grab vars from the query
       // this.$route.query.page returns the "page" var if valid 
       // console.log(this.$route.query.page)

@@ -111,6 +111,10 @@ export default {
             this.isAuthenticating = false
             this.username = ''
             this.password = ''
+            var self = this
+            setTimeout(function () {
+              self.$router.push(self.$route.query.redirect || '/')
+            }, 1000)
           }
         })
     }

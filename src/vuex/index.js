@@ -36,8 +36,20 @@ const store = new Vuex.Store({
           .catch(() => { resolve('error') })
       })
     },
-    initAuth (context) {
-      context.commit('initAuth')
+    initAuth: (context) => {
+      return new Promise((resolve) => {
+        if (typeof window !== 'undefined') {
+          let exp = window.localStorage.getItem('tokenExpiration')
+          var unixTimeStamp = new Date().getTime() / 1000
+          if (exp !== null && parseInt(exp) - unixTimeStamp > 0) {
+            context.commit('initAuth')
+          } else {
+            window.localStorage.clear()
+          }
+          resolve()
+        }
+        resolve()
+      })
     }
   },
   mutations: {
@@ -63,17 +75,5 @@ const store = new Vuex.Store({
     }
   }
 })
-
-if (typeof window !== 'undefined') {
-  document.addEventListener('DOMContentLoaded', function (event) {
-    let exp = window.localStorage.getItem('tokenExpiration')
-    var unixTimeStamp = new Date().getTime() / 1000
-    if (exp !== null && parseInt(exp) - unixTimeStamp > 0) {
-      store.dispatch('initAuth')
-    } else {
-      window.localStorage.clear()
-    }
-  })
-}
 
 export default store

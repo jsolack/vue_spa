@@ -2,7 +2,7 @@ import appService from '../app.service.js'
 
 const state = {
   cards: [],
-  categoryid: ''
+  categoryId: 'data'
 }
 
 const getters = {
