@@ -112,6 +112,7 @@ module.exports = function normalizeComponent (
 __WEBPACK_IMPORTED_MODULE_0_axios___default.a.defaults.baseURL = 'https://o2beta.gongos.com/vue_spa_rest_api/default/';
 
 __WEBPACK_IMPORTED_MODULE_0_axios___default.a.interceptors.request.use(function (config) {
+  config.withCredentials = true;
   if (typeof window === 'undefined') {
     return config;
   }
@@ -1141,7 +1142,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }
     });
     // this is how you would grab vars from the query
-    // this.$route.query.page returns the "page" var if valid 
+    // this.$route.query.page returns the "page" var if valid
     // console.log(this.$route.query.page)
   }
 });
