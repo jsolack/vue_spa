@@ -77,7 +77,7 @@
           }
         })
       // this is how you would grab vars from the query
-      // this.$route.query.page returns the "page" var if valid 
+      // this.$route.query.page returns the "page" var if valid
       // console.log(this.$route.query.page)
     }
   }

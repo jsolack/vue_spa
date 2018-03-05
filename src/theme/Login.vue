@@ -94,7 +94,7 @@ export default {
   },
   methods: {
     /*
-    You can dispatch actions in components with this.$store.dispatch('xxx'), 
+    You can dispatch actions in components with this.$store.dispatch('xxx'),
     or use the mapActions helper which maps component methods to store.dispatch calls (requires root store injection)
     */
     ...mapActions({
