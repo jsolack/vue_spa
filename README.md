@@ -1,5 +1,7 @@
 # Vuejs Single Page App Testing
 
+[![Build Status](https://travis-ci.org/mattcc82/vue_spa.svg?branch=master)](https://travis-ci.org/mattcc82/vue_spa)
+
 Playing around with Vue.js to get familiar with SPA patterns using Vue.js as the VM renderer. Includes technologies/tools like Node.js, Express, Webpack, NPM, and ESLint. 
 
 ## Getting Started
