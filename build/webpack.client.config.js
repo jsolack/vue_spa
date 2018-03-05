@@ -1,9 +1,15 @@
 const base = require('./webpack.base.config')
+const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const config = Object.assign({}, base, {
-  plugins: base.plugins || []
+  plugins: (base.plugins || []).concat([
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'assets/js/[name].js'
+    })
+  ])
 })
 
 // since we dont want the css extract to happen server-side, 
@@ -20,5 +26,20 @@ config.plugins.push(
     { from: './static', to: 'assets/static' }
   ])
 )
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process-env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warning: false
+      }
+    })
+  )
+}
 
 module.exports = config
