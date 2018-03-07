@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://o2beta.gongos.com/vue_spa_rest_api/default/'
+axios.defaults.baseURL = 'https://gongos-ds-vue-spa-api.azurewebsites.net/vue_spa_rest_api/default/'
 
 axios.interceptors.request.use(function (config) {
   config.withCredentials = true
@@ -14,7 +14,8 @@ axios.interceptors.request.use(function (config) {
   return config
 })
 
-const imgPath = 'https://o2beta.gongos.com/vue_spa_rest_api/static/images/api/'
+const imgPath = 'https://gongos-ds-vue-spa-api.azurewebsites.net/vue_spa_rest_api/static/images/api/'
+
 let data = {}
 
 const appService = {
