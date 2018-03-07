@@ -3,7 +3,7 @@ import axios from 'axios'
 axios.defaults.baseURL = 'https://gongos-ds-vue-spa-api.azurewebsites.net/vue_spa_rest_api/default/'
 
 axios.interceptors.request.use(function (config) {
-  config.withCredentials = true
+  // config.withCredentials = true
   if (typeof window === 'undefined') {
     return config
   }
