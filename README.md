@@ -81,6 +81,10 @@ localhost:3000
 I set up Web2py restful api to communicate back data and auth information. Check out the guts of that out here:
 (https://o2beta.gongos.com/vue_spa_rest_api/)
 
+OR
+
+(https://gongos-ds-vue-spa-api.azurewebsites.net/vue_spa_rest_api/)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
