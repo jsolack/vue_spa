@@ -44,6 +44,25 @@ Unit testing using [Karma](http://karma-runner.github.io/2.0/index.html) (test r
 * Prevents accidental use of poorly-named browser globals like open, length, event, and name.
 * And more goodness – give standard a try today!
 
+ES6 module exports / import pattern: (http://exploringjs.com/es6/ch_modules.html)
+
+```javascript
+//------ lib.js ------
+export const sqrt = Math.sqrt;
+export function square(x) {
+    return x * x;
+}
+export function diag(x, y) {
+    return sqrt(square(x) + square(y));
+}
+
+//------ main.js ------
+import { square, diag } from 'lib';
+console.log(square(11)); // 121
+console.log(diag(4, 3)); // 5
+
+```
+
 ### Prerequisites
 
 Here's what you'll need:
@@ -76,7 +95,35 @@ Navigate to
 localhost:3000
 ```
 
-### Footnote
+NPM scripts:
+
+---
+
+Starts the app localhost:
+
+```
+npm start
+```
+
+Rebuilds the app (dist dir):
+
+```
+npm build
+```
+
+Start Karma unit tests:
+
+```
+npm test
+```
+
+Mimic production env in localhost (NODE_ENV=development):
+
+```
+npm dev
+```
+
+### Footnotes
 
 I set up Web2py restful api to communicate back data and auth information. Check out the guts of that out here:
 (https://o2beta.gongos.com/vue_spa_rest_api/)
@@ -84,6 +131,8 @@ I set up Web2py restful api to communicate back data and auth information. Check
 OR
 
 (https://gongos-ds-vue-spa-api.azurewebsites.net/vue_spa_rest_api/)
+
+ *** I didn't create a script to automatically rebuild the dist folder for deployment. I just manually "npm build" and push to Github and Azure picks up the change and rebuilds on Azure
 
 ## License
 
