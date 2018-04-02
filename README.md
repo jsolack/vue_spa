@@ -44,6 +44,8 @@ Unit testing using [Karma](http://karma-runner.github.io/2.0/index.html) (test r
 * Prevents accidental use of poorly-named browser globals like open, length, event, and name.
 * And more goodness – give standard a try today!
 
+Travis CI - integrates to Github and will rebuild and test your app when updating your repo (https://travis-ci.org/)
+
 ES6 module exports / import pattern: (http://exploringjs.com/es6/ch_modules.html)
 
 ```javascript
