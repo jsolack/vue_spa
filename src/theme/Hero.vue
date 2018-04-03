@@ -7,7 +7,7 @@
         </h1>
         <h2 class="subtitle">
           <span v-if="isAuthenticated">{{main_subtitle}}</span>
-          <span v-else>Please log in</span>
+          <span v-else>Please Log in</span>
         </h2>
       </div>
     </div>
